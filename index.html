@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paletas de Cores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Paletas de Cores</h1>
+        <div id="paletas-container"></div>
+    </div>
+
+    <script src="array.js"></script>
+    <script>
+        // Função para criar elementos visuais das paletas
+        function criarPaletasVisuais() {
+            const container = document.getElementById('paletas-container');
+
+            paletasDeCores.forEach((paleta, index) => {
+                const paletaDiv = document.createElement('div');
+                paletaDiv.className = 'paleta';
+
+                const titulo = document.createElement('h2');
+                titulo.textContent = paleta.nome;
+                paletaDiv.appendChild(titulo);
+
+                const coresDiv = document.createElement('div');
+                coresDiv.className = 'cores';
+
+                paleta.cores.forEach(cor => {
+                    const corDiv = document.createElement('div');
+                    corDiv.className = 'cor';
+                    corDiv.style.backgroundColor = cor.hex;
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'cor-info';
+                    infoDiv.innerHTML = `
+                        <span class="hex">${cor.hex}</span>
+                        <span class="nome">${cor.nome}</span>
+                    `;
+
+                    corDiv.appendChild(infoDiv);
+                    coresDiv.appendChild(corDiv);
+                });
+
+                paletaDiv.appendChild(coresDiv);
+                container.appendChild(paletaDiv);
+            });
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function () {
+            criarPaletasVisuais();
+            console.log('Paletas carregadas com sucesso!');
+            exibirPaletas(); // Exibe no console também
+        });
+    </script>
+</body>
+
+</html>
